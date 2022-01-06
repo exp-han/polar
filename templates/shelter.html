@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    function search_shelter() {
+        $.ajax({
+            type: "POST",
+            url: "/search/shelter",
+            data: {},
+            success: function (response) {
+                let hospitals = response['hospitals']
+                for (let i=0; i < hospitals.length; i++) {
+                    hospital_listing()
+                }
+            }
+        })
+    }
+</script>
+<body>
+    <h1>Shelter</h1>
+</body>
+</html>

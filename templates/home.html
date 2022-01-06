@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <title>Polar</title>
+</head>
+<style>
+    .base {
+        background-color: #F5F9FB;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .search-base {
+        margin: auto;
+        background-color: #CDCDCD;
+        width: 724px;
+        height: 300px;
+        background-position: center;
+        background-size: cover;
+        border-radius: 10px;
+        text-align: center;
+        vertical-align: auto;
+        padding: 40px;
+        align-items: center;
+    }
+
+    .search-elements {
+        width: 100%;
+        height: 100%;
+        /* display: flex; */
+        align-items: center;
+    }
+
+    .search-elements-wrapper {
+        width: 100%;
+        height: 100%;
+        align-items: center;
+    }
+</style>
+<script>
+    function search() {
+        // TODO: 
+        // user input / selection 없을 때 알림창
+        let s = $('#service_selector').val();
+        let u = $('#user_input').val();
+        let r = $('input[name=range]:checked').val();
+        if (s == "hospital") {
+            hospital_search(s, u, r);
+        } else {
+            // TODO: shelter_search implementation
+            shelter_search(s, u, r);
+        }
+    }
+
+    function hospital_search(s, u, r) {
+        // 'service_selection': service_selection, 'user_input': user_input, 'range_selection': range_selection
+        let service_selection = s;
+        let user_input = u;
+        let range_selection = r;
+        $.ajax({
+            type: "POST",
+            // url: "/search/hospital",
+            url: "/search/hospital",
+            data: {'user_input': user_input, 'range_selection': range_selection},
+            success: function(response) {
+                console.log('Hospital search activated');
+                // TODO: move to get hospital page url
+                // window.location.href='/test_hospital';
+                hospital_listing(service_selection, user_input, range_selection);
+            }
+        })
+    }
+    function hospital_listing(s, u, r) {
+        let service_selection = s;
+        let user_input = u;
+        let range_selection = r;
+        $.ajax({
+            type: "GET",
+            url: '/search/hospital',
+            data: {'service': service_selection, 'input': user_input, 'radius': range_selection},
+            success: function(response) {
+                console.log('Hospital listing activated');
+                route = response.route;
+                // route = response['result']
+                // console.log(route)
+                window.location.href=route;
+            }
+        })
+    }
+
+    function shelter_search(s, u, r) {
+        let service_selection = s;
+        let user_input = u;
+        let range_selection = r;
+        $.ajax({
+            type: "POST",
+            // url: "/search/hospital",
+            url: "/search/shelter",
+            data: {'user_input': user_input, 'range_selection': range_selection},
+            success: function(response) {
+                console.log('Shelter search activated');
+                // TODO: move to get hospital page url
+                // window.location.href='/test_hospital';
+                shelter_listing(service_selection, user_input, range_selection);
+            }
+        })
+    }
+
+    function shelter_listing(s, u, r) {
+        let service_selection = s;
+        let user_input = u;
+        let range_selection = r;
+        $.ajax({
+            type: "GET",
+            url: '/search/shelter',
+            data: {'service': service_selection, 'input': user_input, 'radius': range_selection},
+            success: function(response) {
+                console.log('Shelter listing activated');
+                route = response.route;
+                // route = response['result']
+                // console.log(route)
+                window.location.href=route;
+            }
+        })
+    }
+</script>
+
+<body>
+    <div class='base'>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F5F9FB;">
+            <a class="navbar-brand" href="#">Polar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Search <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Community</a>
+                    </li>
+                </ul>
+                <form class="form-inline">
+                    <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit">Login</button>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign up</button>
+                </form>
+            </div>
+        </nav>
+        <!-- Search Box -->
+        <div class="search-base">
+            <div class="search-elements">
+                <!-- Hospital or Shelter selector -->
+                <select id="service_selector" class="form-select form-select-lg mb-3"
+                    aria-label=".form-select-lg example">
+                    <option selected>Open this select menu</option>
+                    <option value="hospital">Hospital</option>
+                    <option value="shelter">Shelter</option>
+                </select>
+                <!-- User input: zipcode or place name -->
+                <div class="input-group mb-3">
+                    <input id="user_input" type="text" class="form-control" aria-describedby="inputGroup-sizing-default"
+                        placeholder="zipcode / place name">
+                </div>
+                <!-- Range select section -->
+                <!-- TODO: get selected option of miles -->
+                <div class="range-selector">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="range" id="inlineRadio1" value="5"
+                            checked>
+                        <label class="form-check-label" for="exampleRadios1">5 miles</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="range" id="inlineRadio2"
+                            value="10">
+                        <label class="form-check-label" for="inlineRadio2">10 miles</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="range" id="inlineRadio3"
+                            value="15">
+                        <label class="form-check-label" for="inlineRadio3">15 miles</label>
+                    </div>
+                </div>
+                <p></p>
+                <div>
+                    <button onclick="search()" type="button" class="btn btn-info">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
