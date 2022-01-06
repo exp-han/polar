@@ -99,9 +99,10 @@
             success: function(response) {
                 console.log('Hospital listing activated');
                 route = response.route;
+                
                 // route = response['result']
-                // console.log(route)
-                window.location.href=route;
+                console.log(route)
+                // window.location.href=route;
             }
         })
     }
