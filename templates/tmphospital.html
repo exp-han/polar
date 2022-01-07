@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Ubuntu&display=swap" rel="stylesheet">
+    <title>Polar</title>
+</head>
+<style>
+    body {
+        background-color: white;
+    }
+
+    .navbar-body {
+        background: #F5F9FB;
+    }
+
+    .header2 {
+        font-family: 'Ubuntu', sans-serif;
+        color: #8d97ad;
+        font-weight: 300
+    }
+
+    .header2 .font-12 {
+        font-size: 12px
+    }
+
+    .header2 .dropdown-item {
+        padding: 8px 1rem;
+        color: #8d97ad
+    }
+
+    .header2 .h2-nav .navbar-nav .nav-item .nav-link {
+        padding: 12px 0px;
+        color: black;
+        font-weight: 400
+    }
+
+    .header2 .h2-nav .navbar-nav .nav-item .nav-link:hover {
+        opacity: 100;
+        color: #263238
+    }
+
+    .header2 .h2-nav .navbar-nav .nav-item1 {
+        margin: 0 20px
+    }
+
+    .header2 .h2-nav .navbar-nav .nav-item2 {
+        margin: 0 10px
+    }
+
+    @media (min-width: 1024px) {
+        .header2 .navbar-nav>.dropdown .dropdown-menu {
+            opacity: 100;
+            min-width: 210px;
+            margin-top: 0px
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .header2 .dropdown-submenu:hover>.dropdown-menu {
+            opacity: 100;
+            display: block
+        }
+    }
+
+    .header2 .dropdown-toggle::after {
+        display: none
+    }
+
+    @media (min-width: 1024px) {
+        .header2 .hover-dropdown .navbar-nav>.dropdown:hover>.dropdown-menu {
+            opacity: 100;
+            display: block;
+            margin-top: 0px
+        }
+    }
+
+    .black-font {
+        color: black;
+    }
+
+    .bolder {
+        font-weight: 900;
+    }
+
+    .mytitle {
+        font-size: 28px;
+        margin-left: 110px;
+    }
+
+    .header2 .btn-dark {
+        color: black;
+        background-color: #b6dcff;
+        border-color: #9dadbd;
+        border-radius: 22px;
+    }
+
+    .header2 .btn-dark:hover {
+        opacity: 100;
+        color: #fff;
+        background-color: #2d3338;
+        border-color: #1d2124
+    }
+
+    .header2 .h2-nav .navbar-nav .nav-item .btn {
+        opacity: 100
+    }
+
+    .header2 .h2-nav .navbar-nav .nav-item .btn:hover {
+        opacity: 100
+    }
+
+    .header2 .dropdown-submenu>.dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-left: 0;
+        border-radius: 0.25rem;
+        display: none
+    }
+
+    .margins {
+        margin: 70px auto;
+    }
+
+    .marginleft {
+        margin-left: 190px;
+    }
+
+    .btnSubmit {
+        font-weight: 600;
+        width: 10%;
+        height: 50px;
+        color: #282726;
+        background-color: #fff;
+        border: none;
+        border-radius: 1.5rem;
+        align-content: center;
+    }
+
+    .form-group {
+        align-items: center;
+    }
+
+    .btn {
+        background-color: #EFF4F4;
+    }
+
+    /* Listing portion */
+    .card {
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-width: 2px;
+        color: #fff;
+        border-radius: 12px;
+        transition: border-color 1s, box-shadow 0.5s;
+    }
+
+    .card:hover {
+        border-color: gray;
+        box-shadow: 0px 0px 10px 2px gray;
+    }
+
+    .user-timing {
+        right: 9px;
+        bottom: 9px;
+        color: #fff
+    }
+
+    .views-content {
+        color: #606271
+    }
+
+    .views {
+        font-size: 12px
+    }
+
+    .dots {
+        display: flex;
+        height: 10px;
+        width: 10px;
+        background-color: green;
+        border-radius: 50%;
+        margin-left: 5px;
+        margin-bottom: 6px
+    }
+
+    .days-ago {
+        margin-top: -10px;
+        color: #606271
+    }
+
+    .snipimage img {
+        height: 200px
+    }
+
+    .modal-content {
+        color: #1d2124;
+    }
+
+    .column {
+        float: left;
+        width: 50%;
+        padding: 10px;
+        height: 300px;
+        /* Should be removed. Only for demonstration */
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const service = urlParams.get('service')
+        const user_input = urlParams.get('input');
+        const radius = urlParams.get('radius');
+        show_hospitals(service, user_input, radius);
+    });
+
+    function show_hospitals(s, u, r) {
+        $.ajax({
+            type: "GET",
+            url: "/search/hospital/result",
+            data: { 'user_input': u, 'radius': r },
+            success: function (response) {
+                hospital_list = response['result'];
+                // console.log(hospital_list[0]);
+                // console.log(hospital_list.length);
+                // console.log(hospital_list[0][0]);
+                // console.log(hospital_list[0].length);
+                for (let i = 0; i < hospital_list.length; i++) {
+                    for (let j = 0; j < hospital_list[i].length; j++) {
+                        let h = hospital_list[i][j]
+                        let name = h['name']
+                        let business_status = h["business_status"]
+                        let address = h["address"]
+                        let zipcode = h["zipcode"]
+                        let rating = h["rating"]
+                        let gplace_id = h["gplace_id"]
+                        let img_url = "https://cdn.dribbble.com/users/283587/screenshots/1131503/media/44c51cab1c0d1142d9979c70a12af3e5.jpg?compress=1&resize=800x600&vertical=top"
+                        let temp_html = `<div>
+                            <div class="card p-3 mb-3" style="width: 1000px;">
+                                <div onclick="get_details('${gplace_id}')" class="stretched-link row">
+                                    <div class="column" style="width: 250px; margin-left: 30px;">
+                                        <div class="position-relative snipimage" style="padding: 10px; width:250px;">
+                                            <img src="https://images.saatchiart.com/saatchi/660150/art/3397419/2467306-FLBVERGX-7.jpg" style="width: 200px;
+                                            height: 195px; border: 2px solid #BBBBBB; border-radius: 121px; margin-right: 10px;">
+                                        </div>
+                                    </div>
+                                    <div id='${gplace_id}' class="column">
+                                        <div data-toggle="modal" data-target=".bd-example-modal-lg" class="mt-2"
+                                            style="padding-top: 20px;">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h3 class="stretched-link mb-1" style="color: #1d2124;">${name}</h3>
+                                                <span><i class="fa fa-heart text-danger"></i></span>
+                                            </div>
+                                            <div>
+                                                <div style="width:50%; display:flex;"
+                                                    class="d-flex justify-content-md-start justify-content-between views-content mt-2">
+                                                    <div class="d-flex flex-row align-items-center"> <i class="fa fa-eye"></i> <span
+                                                            class="ms-1 views" style="font-size: medium;">${address}</span> </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column">
+                                        <div
+                                            style="padding-top: 17px; text-align: center; background-color:#fff; border:2px solid #BBBBBB; height:100px;
+                                                    border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%; width:100px; align-items: center;">
+                                            <span style="line-height:1em; color:#1d2124; font-size: 45px;">${rating}</span>
+                                            <br>
+                                            <span style="font-size: 13px; color:#1d2124;">out of 5</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`
+
+                        $('#hospital-box').append(temp_html)
+                    }
+                }
+            }
+        })
+    }
+    // function get_details(gplace_id) {
+    //     console.log(1)
+    //     $.ajax({
+    //         type: "GET",
+    //         url: "/search/hospital/result/details",
+    //         data: { 'gplace_id': gplace_id },
+    //         success: function (response) {
+    //             console.log(response['result'])
+    //             let res = JSON.stringify(response['result'])
+    //             let tmp_html = `<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    //                 <div class="modal-dialog modal-lg">
+    //                     <div class="modal-content">
+    //                         <p>${res}</p>
+    //                     </div>
+    //                 </div>
+    //             </div>`
+    //             let id = '#' + gplace_id
+    //             $(id).append(tmp_html)
+    //         }
+    //     })
+    // }
+
+    function search() {
+        let service_selection = 'hospital'
+        let user_input = $('#user_input').val();
+        let range_selection = $('#range_selection option:selected').val()
+
+        $.ajax({
+            type: "POST",
+            // url: "/search/hospital",
+            url: "/search/hospital",
+            data: { 'user_input': user_input, 'range_selection': range_selection },
+            success: function (response) {
+                console.log('Hospital search activated');
+                // TODO: move to get hospital page url
+                // window.location.href='/test_hospital';
+                hospital_listing(service_selection, user_input, range_selection);
+            }
+        })
+    }
+
+    function hospital_listing(s, u, r) {
+        let service_selection = s;
+        let user_input = u;
+        let range_selection = r;
+        $.ajax({
+            type: "GET",
+            url: '/search/hospital',
+            data: { 'service': service_selection, 'input': user_input, 'radius': range_selection },
+            success: function (response) {
+                console.log('Hospital listing activated');
+                route = response.route;
+
+                // route = response['result']
+                console.log(route)
+                window.location.href = route;
+            }
+        })
+    }
+
+</script>
+
+<body>
+    <div class="header2 navbar-body">
+        <div class="">
+            <!-- Header 1 code -->
+            <nav class="navbar navbar-expand-lg h2-nav">
+                <a class="navbar-brand black-font bolder mytitle" style="opacity: 100;" href="#">Polar</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header2"
+                    aria-controls="header2" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-menu"></span>
+                </button>
+                <div class="collapse navbar-collapse hover-dropdown" id="header2">
+                    <ul class="navbar-nav">
+                        <li class="nav-item nav-item1 active"><a class="nav-link" href="#">About</a></li>
+                        <li class="nav-item nav-item1"><a class="nav-link" href="#">Search</a></li>
+                        <li class="nav-item nav-item1"><a class="nav-link" href="#">Community</a></li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item nav-item2"><a class="btn rounded-pill btn-dark py-2 px-4" href="#">Sign
+                                in</a></li>
+                        <li class="nav-item nav-item2"><a class="btn rounded-pill btn-dark py-2 px-4" href="#">Sign
+                                up</a></li>
+                    </ul>
+                </div>
+            </nav> <!-- End Header 1 code -->
+        </div>
+    </div>
+    <div class="container mt-4">
+        <div class="search-input mt-3 mb-3" style="display: flex;">
+            <input id="user_input" type="text" class="form-control" placeholder="zipcode"
+                style="display: inline-block;margin-right: 10px; padding-left: 20px; width: 400px; height: 50px; border-radius: 20px; margin-bottom:20px;" />
+            <select id="range_selection" class="form-select"
+                style="display: inline-block; margin-right:10px; width: 200px; height: 50px; border-radius: 20px; margin-bottom:20px; padding: 10px; padding-right: 10px;">
+                <option selected style="color:gray;">Select Distance</option>
+                <option value="5">5 miles</option>
+                <option value="10">10 miles</option>
+                <option value="15">15 miles</option>
+            </select>
+            <button onclick="search()"
+                style="background-color: #b6dcff; display: flex; margin-left: 10px; display: block;" type="submit"
+                class="btnSubmit btn-outline-secondary">Search</button>
+        </div>
+        <!-- card section -->
+        <div id='hospital-box'>
+            <div>
+                <div class="card p-3 mb-3" data-toggle="modal" data-target="#exampleModalLong" style="width: 1000px;">
+                    <div onclick="get_details('${gplace_id}')" class="stretched-link class=" row" style="display: flex;">
+                        <div style="width: 250px; margin-left: 30px;">
+                            <div class="position-relative snipimage" style="padding: 10px; width:250px;">
+                                <img src="https://images.saatchiart.com/saatchi/660150/art/3397419/2467306-FLBVERGX-7.jpg"
+                                    style="width: 200px;
+                                height: 195px; border: 2px solid #BBBBBB; border-radius: 121px; margin-right: 10px;">
+                            </div>
+                        </div>
+        
+                        <div id='${gplace_id}' class="col-md-8 container">
+        
+                            <div class="col">
+                                <br>
+                                <br>
+                                <div
+                                    style="float: right;margin-top:10px;padding-top: 17px; text-align: center; background-color:#fff; border:2px solid #BBBBBB; height:100px; border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%; width:100px; align-items: center;">
+                                    <span style="line-height:1em; color:#1d2124; font-size: 45px;">${rating}</span>
+                                    <br>
+                                    <span style="font-size: 13px; color:#1d2124;">out of 5</span>
+                                </div>
+                            </div>
+                            <div class="mt-2 row" style="display: inline-block;">
+                                <div class="col">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h3 class="stretched-link mb-1" style="color: #1d2124;">${name}</h3>
+                                        <span><i class="fa fa-heart text-danger"></i></span>
+                                    </div>
+                                    <div>
+                                        <div style="width:50%; display:flex;"
+                                            class="d-flex justify-content-md-start justify-content-between views-content mt-2">
+                                            <div class="d-flex flex-row align-items-center"> <i class="fa fa-eye"></i> <span
+                                                    class="ms-1 views" style="font-size: medium;">${address}</span> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+        
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="card p-3 mb-3" style="width: 1000px;">
+                    <div class="stretched-link row">
+                        <div class="column" style="width: 250px; margin-left: 30px;">
+                            <div class="position-relative snipimage" style="padding: 10px; width:250px;">
+                                <img src="https://images.saatchiart.com/saatchi/660150/art/3397419/2467306-FLBVERGX-7.jpg"
+                                    style="width: 200px;
+                                height: 195px; border: 2px solid #BBBBBB; border-radius: 121px; margin-right: 10px;">
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div data-toggle="modal" data-target=".bd-example-modal-lg" class="mt-2"
+                                style="padding-top: 20px;">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h3 class="stretched-link mb-1" style="color: #1d2124;">Providence Veterinary
+                                        Hospital</h3>
+                                    <span><i class="fa fa-heart text-danger"></i></span>
+                                </div>
+                                <div>
+                                    <div style="width:50%; display:flex;"
+                                        class="d-flex justify-content-md-start justify-content-between views-content mt-2">
+                                        <div class="d-flex flex-row align-items-center"> <i class="fa fa-eye"></i> <span
+                                                class="ms-1 views" style="font-size: medium;">2304 Pacific Ave, Alameda,
+                                                CA 94501</span> </div>
+                                    </div>
+                                </div>
+                                <div class="card p-3 mb-3" style="width: 1000px;">
+                                    <div onclick="get_details('${gplace_id}')" class="stretched-link class=" row"
+                                        style="display: flex;">
+                                        <div style="width: 250px; margin-left: 30px;">
+                                            <div class="position-relative snipimage"
+                                                style="padding: 10px; width:250px;">
+                                                <img src="https://images.saatchiart.com/saatchi/660150/art/3397419/2467306-FLBVERGX-7.jpg"
+                                                    style="width: 200px;
+                                                height: 195px; border: 2px solid #BBBBBB; border-radius: 121px; margin-right: 10px;">
+                                            </div>
+                                        </div>
+                                        <div id='${gplace_id}' class="col-md-8">
+                                            <div data-toggle="modal" data-target=".bd-example-modal-lg" class="mt-2"
+                                                style="padding-top: 20px;">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h3 class="stretched-link mb-1" style="color: #1d2124;">Providence
+                                                        Veterinary Hospital</h3>
+                                                    <span><i class="fa fa-heart text-danger"></i></span>
+                                                </div>
+                                                <div>
+                                                    <div style="width:50%; display:flex;"
+                                                        class="d-flex justify-content-md-start justify-content-between views-content mt-2">
+                                                        <div class="d-flex flex-row align-items-center"> <i
+                                                                class="fa fa-eye"></i> <span class="ms-1 views"
+                                                                style="font-size: medium;">2304 Pacific Ave, Alameda, CA
+                                                                94501</span> </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="ml-auto">
+                                                <div
+                                                    style="padding-top: 17px; text-align: center; background-color:#fff; border:2px solid #BBBBBB; height:100px;
+                                                        border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%; width:100px; align-items: center;">
+                                                    <span
+                                                        style="line-height:1em; color:#1d2124; font-size: 45px;">4.7</span>
+                                                    <br>
+                                                    <span style="font-size: 13px; color:#1d2124;">out of 5</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>Reviews</br>
+                                    <div class="line"></div>
+                                    <div class="row d-flex justify-content-between px-3">
+                                        <!-- Review1 -->
+                                        <div
+                                            style="background-color: #BBBBBB; border-radius: 20px; padding-left:15px; padding-right: 15px; margin-bottom: 10px;">
+                                            <div class="card p-3 mb-3" style="width: 1000px; padding: 10px;">
+                                                <div onclick="get_details('${gplace_id}')" class="stretched-link class="
+                                                    row" style="display: flex;">
+                                                    <div id='${gplace_id}' class="col-md-8">
+                                                        <div data-toggle="modal" data-target=".bd-example-modal-lg"
+                                                            class="mt-2" style="padding-top: 10px;">
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center">
+                                                                <h2 style="color: #1d2124; line-height: 5px;">Eleonore
+                                                                    Prevost</h2>
+                                                                <span class="fa fa-star active"></span>
+                                                                <span style="color: #000;">
+                                                                    <span class="fa fa-star active"></span> <span
+                                                                        class="fa fa-star active"></span>
+                                                                    <span class="fa fa-star active"></span> <span
+                                                                        class="fa fa-star"></span>
+                                                                </span>
+                                                                <span><i class="fa fa-heart text-danger"></i></span>
+                                                            </div>
+                                                            <div>
+                                                                <div style="width:50%; display:flex;"
+                                                                    class="d-flex justify-content-md-start justify-content-between views-content mt-2">
+                                                                    <div class="d-flex flex-row align-items-center">
+                                                                        <i class="fa fa-eye"></i>
+                                                                        <span class="ms-1 views"
+                                                                            style="font-size: medium;">3 months
+                                                                            ago</span>
+                                                                    </div>
+                                                                    <br> <br>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div style="width: 950px;"> We had a great experience and they
+                                                            took very good care of our puppy Plush through his
+                                                            neutering surgery.
+                                                            They called to know how he was doing on the day after the
+                                                            surgery and left us with good
+                                                            instructions to take care of him.
+                                                            They are very patient and sweet with Plush too. Thank you!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Review2 -->
+                                        <div
+                                            style="background-color: #BBBBBB; border-radius: 20px; padding-left:15px; padding-right: 15px; margin-bottom: 10px;">
+                                            <div class="card p-3 mb-3" style="width: 1000px; padding: 10px;">
+                                                <div onclick="get_details('${gplace_id}')" class="stretched-link class="
+                                                    row" style="display: flex;">
+                                                    <div id='${gplace_id}' class="col-md-8">
+                                                        <div data-toggle="modal" data-target=".bd-example-modal-lg"
+                                                            class="mt-2" style="padding-top: 10px;">
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center">
+                                                                <h2 style="color: #1d2124; line-height: 5px;">EJ T</h2>
+                                                                <span class="fa fa-star active"></span>
+                                                                <span style="color: #000;">
+                                                                    <span class="fa fa-star active"></span> <span
+                                                                        class="fa fa-star active"></span>
+                                                                    <span class="fa fa-star active"></span> <span
+                                                                        class="fa fa-star"></span>
+                                                                </span>
+                                                                <span><i class="fa fa-heart text-danger"></i></span>
+                                                            </div>
+                                                            <div>
+                                                                <div style="width:50%; display:flex;"
+                                                                    class="d-flex justify-content-md-start justify-content-between views-content mt-2">
+                                                                    <div class="d-flex flex-row align-items-center">
+                                                                        <i class="fa fa-eye"></i>
+                                                                        <span class="ms-1 views"
+                                                                            style="font-size: medium;">a month
+                                                                            ago</span>
+                                                                    </div>
+                                                                    <br> <br>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div style="width: 950px;"> My two girls have grown up here.
+                                                            They had their first exam in 10 days with Providence Clinic
+                                                            and now they are almost 4 years old.
+                                                            The most important thing to me here is I feel comfortable
+                                                            leaving my cats for them to take care of without worrying
+                                                            about anything,
+                                                            we all know that cat visiting could be stressful to both the
+                                                            owner and the pet itself.
+                                                            but with the technician & doctors here, There has never been
+                                                            any issues.
+                                                            They are very kind & professional. I moved out a couple of
+                                                            times and visited different hospitals,
+                                                            they are OK but not compared to Providence's service so I
+                                                            still choose to bring my girls back here.
+                                                            Read some comments regarding the charges, I want to say you
+                                                            got what you paid. Also if there is a bigger charge I always
+                                                            get notified before anything happens.
+                                                            I want to make sure my babies get taken care of well.</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Review3 -->
+                                        <div
+                                            style="background-color: #BBBBBB; border-radius: 20px; padding-left:15px; padding-right: 15px; margin-bottom: 10px;">
+                                            <div class="card p-3 mb-3" style="width: 1000px; padding: 10px;">
+                                                <div onclick="get_details('${gplace_id}')" class="stretched-link class="
+                                                    row" style="display: flex;">
+                                                    <div id='${gplace_id}' class="col-md-8">
+                                                        <div data-toggle="modal" data-target=".bd-example-modal-lg"
+                                                            class="mt-2" style="padding-top: 10px;">
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center">
+                                                                <h2 style="color: #1d2124; line-height: 5px;">Juniper
+                                                                    Moon</h2>
+                                                                <span class="fa fa-star active"></span>
+                                                                <span style="color: #000;">
+                                                                    <span class="fa fa-star active"></span> <span
+                                                                        class="fa fa-star active"></span>
+                                                                    <span class="fa fa-star active"></span> <span
+                                                                        class="fa fa-star"></span>
+                                                                </span>
+                                                                <span><i class="fa fa-heart text-danger"></i></span>
+                                                            </div>
+                                                            <div>
+                                                                <div style="width:50%; display:flex;"
+                                                                    class="d-flex justify-content-md-start justify-content-between views-content mt-2">
+                                                                    <div class="d-flex flex-row align-items-center">
+                                                                        <i class="fa fa-eye"></i>
+                                                                        <span class="ms-1 views"
+                                                                            style="font-size: medium;">8 months
+                                                                            ago</span>
+                                                                    </div>
+                                                                    <br> <br>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div style="width: 950px;"> This was my first time coming to
+                                                            this location. Are usually go to the location on Webster
+                                                            Street but there was a mixup, but everything worked out just
+                                                            fine. It's always hard finding a good vet clinic to take
+                                                            your pets to because you want to feel comfortable and
+                                                            confident since you rely on them to make sure your pet is
+                                                            healthy and in good hands. This is the place to go and BOTH
+                                                            locations are great.\n\nPROS\n-Easy appointment booking
+                                                            online or calling.\n-Staff is so friendly, patient,
+                                                            understanding and helpful.\n-easy drop off appointment due
+                                                            to Covid safety. Just park in the spot, call the front desk
+                                                            and let them know what space number you are in. Easy.\n-good
+                                                            location\n-Clean office\n-They do NOT try to gouge you with
+                                                            unnecessary services or medications. I've had bad
+                                                            experiences with other vet clinics before with my other
+                                                            dog.\n-I feel comfortable and always have a peace of mind
+                                                            whenever I take my pet here.\n-I have had to book with
+                                                            different veterinarian doctors so I could get the soonest
+                                                            appointment, but they all were great and just all
+                                                            consistently good. :) My last two visits were with Dr.
+                                                            Thurman and she was outstanding. Very thorough and patient
+                                                            when explaining things I wasn't sure about.</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Review4 -->
+                                        <div
+                                            style="background-color: #BBBBBB; border-radius: 20px; padding-left:15px; padding-right: 15px; margin-bottom: 10px;">
+                                            <div class="card p-3 mb-3" style="width: 1000px; padding: 10px;">
+                                                <div onclick="get_details('${gplace_id}')" class="stretched-link class="
+                                                    row" style="display: flex;">
+                                                    <div id='${gplace_id}' class="col-md-8">
+                                                        <div data-toggle="modal" data-target=".bd-example-modal-lg"
+                                                            class="mt-2" style="padding-top: 10px;">
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center">
+                                                                <h2 style="color: #1d2124; line-height: 5px;">Thomas
+                                                                    Stevens</h2>
+                                                                <span class="fa fa-star active"></span>
+                                                                <span style="color: #000;">
+                                                                    <span class="fa fa-star active"></span> <span
+                                                                        class="fa fa-star active"></span>
+                                                                    <span class="fa fa-star active"></span> <span
+                                                                        class="fa fa-star"></span>
+                                                                </span>
+                                                                <span><i class="fa fa-heart text-danger"></i></span>
+                                                            </div>
+                                                            <div>
+                                                                <div style="width:50%; display:flex;"
+                                                                    class="d-flex justify-content-md-start justify-content-between views-content mt-2">
+                                                                    <div class="d-flex flex-row align-items-center">
+                                                                        <i class="fa fa-eye"></i>
+                                                                        <span class="ms-1 views"
+                                                                            style="font-size: medium;">9 months
+                                                                            ago</span>
+                                                                    </div>
+                                                                    <br> <br>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div style="width: 950px;"> Wonderful clinic! I was visiting
+                                                            with Lap of Love Veterinary Hospice and I was so impressed
+                                                            by how nice and caring the staff is!</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Review5 -->
+                                        <div
+                                            style="background-color: #BBBBBB; border-radius: 20px; padding-left:15px; padding-right: 15px; margin-bottom: 10px;">
+                                            <div class="card p-3 mb-3" style="width: 1000px; padding: 10px;">
+                                                <div onclick="get_details('${gplace_id}')" class="stretched-link class="
+                                                    row" style="display: flex;">
+                                                    <div id='${gplace_id}' class="col-md-8">
+                                                        <div data-toggle="modal" data-target=".bd-example-modal-lg"
+                                                            class="mt-2" style="padding-top: 10px;">
+                                                            <div
+                                                                class="d-flex justify-content-between align-items-center">
+                                                                <h2 style="color: #1d2124; line-height: 5px;">luis
+                                                                    mojica</h2>
+                                                                <span class="fa fa-star active"></span>
+                                                                <span style="color: #000;">
+                                                                    <span class="fa fa-star active"></span> <span
+                                                                        class="fa fa-star active"></span>
+                                                                    <span class="fa fa-star active"></span> <span
+                                                                        class="fa fa-star"></span>
+                                                                </span>
+                                                                <span><i class="fa fa-heart text-danger"></i></span>
+                                                            </div>
+                                                            <div>
+                                                                <div style="width:50%; display:flex;"
+                                                                    class="d-flex justify-content-md-start justify-content-between views-content mt-2">
+                                                                    <div class="d-flex flex-row align-items-center">
+                                                                        <i class="fa fa-eye"></i>
+                                                                        <span class="ms-1 views"
+                                                                            style="font-size: medium;">6 months
+                                                                            ago</span>
+                                                                    </div>
+                                                                    <br> <br>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div style="width: 950px;"> Professional, great attitude all
+                                                            around!</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div
+                                style="padding-top: 17px; text-align: center; background-color:#fff; border:2px solid #BBBBBB; height:100px;
+                                        border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%; width:100px; align-items: center;">
+                                <span style="line-height:1em; color:#1d2124; font-size: 45px;">4.7</span>
+                                <br>
+                                <span style="font-size: 13px; color:#1d2124;">out of 5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+

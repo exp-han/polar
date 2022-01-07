@@ -1,8 +1,9 @@
 import requests
 import pgeocode as pg
-
 from pymongo import MongoClient
 from requests import api
+
+from pyzipcode import ZipCodeDatabase
 
 client = MongoClient('localhost', 27017)
 db = client.polar
@@ -15,8 +16,8 @@ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/5
 # 클라이언트에서 radius 받아 올 것 
 # zipcode는 아직 안쓸지도 모르는데, zipcode 기반 좌표함수에 넣어서 좌표 얻어낼 것
 # Default radius = 5 miles (8046.72 m)
-def insert_hospital(l, r=8046.72):
-    location, radius = l, r    
+def insert_hospital(z, l, r=5):
+    location, radius = l, r * 1609.34  
     hospital_url = "https://maps.googleapis.com/maps/api/place/textsearch/json?inputtype=textquery&type=veterinary_care&key={api_key}&radius={radius}&location={location}".format(api_key=api_key, radius=radius, location=location)
     data = requests.get(hospital_url, headers=headers).json()
     hospitals = data["results"]
@@ -24,6 +25,7 @@ def insert_hospital(l, r=8046.72):
         name = h["name"]
         business_status = h["business_status"]
         address = h["formatted_address"]
+        zipcode = z
         geometry = h["geometry"]["location"]
         gplace_id = h["place_id"]
         rating = h["rating"]
@@ -32,6 +34,7 @@ def insert_hospital(l, r=8046.72):
             'name': name,
             'business_status': business_status,
             'address': address, 
+            'zipcode': zipcode,
             'geometry': geometry,
             'gplace_id': gplace_id,
             'rating': rating
@@ -43,29 +46,43 @@ def insert_hospital(l, r=8046.72):
 # 상세정보용 디테일 insertion
 # update part 수정할 것
 def insert_details_hospital(gplace_id):
-    hos = db.hospital.find_one({'gplace_id': gplace_id}, {'_id':0})
     detail_url = "https://maps.googleapis.com/maps/api/place/details/json?key={api_key}&place_id={placeid}".format(api_key=api_key, placeid=gplace_id)
-    data = requests.get(detail_url, headers=headers)
+    data = requests.get(detail_url, headers=headers).json()
     details = data['result']
-
     phone = details['formatted_phone_number']
     # reviews = array type
     reviews = details['reviews']
-    db.hospital.update_one({'gplace_id': gplace_id},{'$set':{'phone':phone}})
-    db.hospital.update_one({'gplace_id': gplace_id},{'$set':{'reviews':reviews}})
+
+    h = db.hospital.find_one({'gplace_id': gplace_id}, {'_id':0})
+    print(h)
+    doc = {
+            'name': h['name'],
+            'business_status': h['business_status'],
+            'address': h['address'], 
+            'zipcode': h['zipcode'],
+            'geometry': h['geometry'],
+            'gplace_id': h['gplace_id'],
+            'rating': h['rating'],
+            'phone': phone,
+            'reviews': reviews
+        }
+    print(doc['name'])
+    db.hospital_details.insert_one(doc)
+    return doc
 
 # TODO:
 # 클라이언트에서 zipcode / loc , r 받아오기
 # Default radius = 5 miles (8046.72 m)
-def insert_shelter(l, r=8046.72):
-    location, radius = l, r
+def insert_shelter(z, l, r=5):
+    location, radius = l, r * 1609.34
     shelter_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?sensor=false&keyword='pet%20shelter'&key={api_key}&location={location}&radius={radius}".format(api_key=api_key, location=location, radius=radius)
     data = requests.get(shelter_url,headers=headers).json()
     shelters = data["results"]
     for s in shelters:
         name = s["name"]
         business_status = s["business_status"]
-        address = s["formatted_address"]
+        address = s["vicinity"]
+        zipcode= z,
         geometry = s["geometry"]["location"]
         gplace_id = s["place_id"]
         rating = s["rating"]
@@ -73,6 +90,7 @@ def insert_shelter(l, r=8046.72):
             'name': name,
             'business_status': business_status,
             'address': address, 
+            'zipcode': zipcode,
             'geometry': geometry,
             'gplace_id': gplace_id,
             'rating': rating
@@ -113,9 +131,31 @@ def insert_zipcode_loc(z, c='us'):
     print('ZIPCODE INSERTION CCMOPLETE: country: {c} zipcode: {z} latlong: {l}'.format(c=country, z=zipcode, l=latlongstr))
     return latlongstr
 
+def get_near_zipcode(z, r=5):
+    zcdb = ZipCodeDatabase()
+    zipcode = str(z)
+    radius = int(r)
+    in_radius = [z.zip for z in zcdb.get_zipcodes_around_radius(zipcode, radius)] # ('ZIP', radius in miles)
+    for z in in_radius:
+        loc = db.ziplatlong.find_one({'zipcode':z},{'_id':0})
+        l = ""
+        if loc is None:
+            l = insert_zipcode_loc(z)
+            insert_shelter(z, l, radius)
+            insert_hospital(z, l, radius)
+    return in_radius
+def get_near_hospital(z, r):
+    zipcode = z
+    radius = r
+    near_zipcode = get_near_zipcode(zipcode, radius)
+    res = []
+    for item in near_zipcode:
+        res.append(list(db.hospital.find({'zipcode':item},{'_id':0})))
+    return res
+
 ### Testing
-# if __name__=="__main__":
-#     print(calculate_loc(544))
+if __name__=="__main__":
+    get_near_hospital(94608, 5)
 
 # 할 일:
 # 1. init_db.py

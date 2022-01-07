@@ -212,14 +212,6 @@
     .snipimage img {
         height: 200px
     }
-
-    .modal {
-        color:#1d2124;
-    }
-
-    .modal-content {
-        color: #1d2124;
-    }
 </style>
 <script>
     $(document).ready(function () {
@@ -251,50 +243,38 @@
                         let rating = h["rating"]
                         let gplace_id = h["gplace_id"]
                         let img_url = "https://cdn.dribbble.com/users/283587/screenshots/1131503/media/44c51cab1c0d1142d9979c70a12af3e5.jpg?compress=1&resize=800x600&vertical=top"
-                        let temp_html = `<div>
-                            <div class="card p-3 mb-3" style="width: 1000px;">
-                                <div onclick="get_details('${gplace_id}')" class="stretched-link class=" row" style="display: flex;">
-                                    <div style="width: 250px; margin-left: 30px;">
-                                        <div class="position-relative snipimage" style="padding: 10px; width:250px;">
-                                            <img src="https://images.saatchiart.com/saatchi/660150/art/3397419/2467306-FLBVERGX-7.jpg" style="width: 200px;
-                                            height: 195px; border: 2px solid #BBBBBB; border-radius: 121px; margin-right: 10px;">
-                                        </div>
-                                    </div>
-
-                                    <div id='${gplace_id}' class="col-md-8 container">
-
-                                        <div class="col">
-                                            <br>
-                                            <br>
+                        let temp_html = `<div id='${gplace_id}'>
+                                    <div class="card p-3 mb-3" style="width: 1000px;" data-toggle="modal" data-target="#exampleModalLong" >
+                                        <div onclick="get_details('${gplace_id}')" class="stretched-link class="row" style="display: flex;">
+                                            <div style="width: 250px; margin-left: 30px;">
+                                                <div class="position-relative snipimage" style="padding: 10px; width:250px;">
+                                                    <img src="https://images.saatchiart.com/saatchi/660150/art/3397419/2467306-FLBVERGX-7.jpg"
+                                                    style="width: 200px;
+                                                    height: 195px; border: 2px solid #BBBBBB; border-radius: 121px; margin-right: 10px;">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="mt-2" style="padding-top: 20px;">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <h3 class="stretched-link mb-1" style="color: #1d2124;">${name}</h3> 
+                                                        <span><i class="fa fa-heart text-danger"></i></span>
+                                                    </div>
+                                                <div class="d-flex justify-content-md-start justify-content-between views-content mt-2">
+                                                    <div class="d-flex flex-row align-items-center"> <i class="fa fa-eye"></i> <span
+                                                            class="ms-1 views" style="font-size: medium;">${address}</span> </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div
-                                                style="float: right;margin-top:10px;padding-top: 17px; text-align: center; background-color:#fff; border:2px solid #BBBBBB; height:100px; border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%; width:100px; align-items: center;">
+                                                style="padding-top: 17px; text-align: center; background-color:#fff; border:2px solid #BBBBBB; height:100px;
+                                                border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%; width:100px; align-items: center;">
                                                 <span style="line-height:1em; color:#1d2124; font-size: 45px;">${rating}</span>
                                                 <br>
                                                 <span style="font-size: 13px; color:#1d2124;">out of 5</span>
                                             </div>
                                         </div>
-                                        <div data-toggle="modal" data-target=".bd-example-modal-lg" class="mt-2 row"
-                                            style="display: inline-block;">
-                                            <div class="col">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <h3 class="stretched-link mb-1" style="color: #1d2124;">${name}</h3>
-                                                    <span><i class="fa fa-heart text-danger"></i></span>
-                                                </div>
-                                                <div>
-                                                    <div style="width:50%; display:flex;"
-                                                        class="d-flex justify-content-md-start justify-content-between views-content mt-2">
-                                                        <div class="d-flex flex-row align-items-center"> <i class="fa fa-eye"></i> <span
-                                                                class="ms-1 views" style="font-size: medium;">${address}</span> </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
                                     </div>
-
-                                </div>
-                            </div>
-                        </div>`
+                                </div>`
 
                         $('#hospital-box').append(temp_html)
                     }
@@ -311,13 +291,27 @@
             success: function (response) {
                 console.log(response['result'])
                 let res = JSON.stringify(response['result'])
-                let tmp_html = `<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <p>${res}</p>
+                let tmp_html = `<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>${res}</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                            </div>
                         </div>
-                    </div>
-                </div>`
+                    </div>`
+
+                
                 let id = '#' + gplace_id
                 $(id).append(tmp_html)
             }
@@ -365,52 +359,40 @@
 </script>
 
 <body>
-
-    <div class="header2 navbar-body">
-        <div class="">
-            <!-- Header 1 code -->
-            <nav class="navbar navbar-expand-lg h2-nav">
-                <a class="navbar-brand black-font bolder mytitle" style="opacity: 100;" href="#">Polar</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header2"
-                    aria-controls="header2" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="icon-menu"></span>
-                </button>
-                <div class="collapse navbar-collapse hover-dropdown" id="header2">
-                    <ul class="navbar-nav">
-                        <li class="nav-item nav-item1 active"><a class="nav-link" href="#">About</a></li>
-                        <li class="nav-item nav-item1"><a class="nav-link" href="#">Search</a></li>
-                        <li class="nav-item nav-item1"><a class="nav-link" href="#">Community</a></li>
-                    </ul>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item nav-item2"><a class="btn rounded-pill btn-dark py-2 px-4" href="#">Sign
-                                in</a></li>
-                        <li class="nav-item nav-item2"><a class="btn rounded-pill btn-dark py-2 px-4" href="#">Sign
-                                up</a></li>
-                    </ul>
+    <div>
+        <div class="card p-3 mb-3" style="width: 1000px;">
+            <div onclick="get_details('${gplace_id}')" class="stretched-link class="row" style="display: flex;">
+                <div style="width: 250px; margin-left: 30px;">
+                    <div class="position-relative snipimage" style="padding: 10px; width:250px;">
+                        <img src="https://images.saatchiart.com/saatchi/660150/art/3397419/2467306-FLBVERGX-7.jpg"
+                        style="width: 200px;
+                        height: 195px; border: 2px solid #BBBBBB; border-radius: 121px; margin-right: 10px;">
+                    </div>
                 </div>
-            </nav> <!-- End Header 1 code -->
-        </div>
-    </div>
-    <div class="container mt-4">
-        <div class="search-input mt-3 mb-3" style="display: flex;">
-            <input id="user_input" type="text" class="form-control" placeholder="zipcode"
-                style="display: inline-block;margin-right: 10px; padding-left: 20px; width: 400px; height: 50px; border-radius: 20px; margin-bottom:20px;" />
-            <select id="range_selection" class="form-select"
-                style="display: inline-block; margin-right:10px; width: 200px; height: 50px; border-radius: 20px; margin-bottom:20px; padding: 10px; padding-right: 10px;">
-                <option selected style="color:gray;">Select Distance</option>
-                <option value="5">5 miles</option>
-                <option value="10">10 miles</option>
-                <option value="15">15 miles</option>
-            </select>
-            <button onclick="search()"
-                style="background-color: #b6dcff; display: flex; margin-left: 10px; display: block;" type="submit"
-                class="btnSubmit btn-outline-secondary">Search</button>
-        </div>
-        <!-- card section -->
-        <div id='hospital-box'>
-            
+                <div id='${gplace_id}' class="col-md-8">
+                    <div data-toggle="modal" data-target=".bd-example-modal-lg" class="mt-2" style="padding-top: 20px;">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="stretched-link mb-1" style="color: #1d2124;">${name}</h3> 
+                            <span><i class="fa fa-heart text-danger"></i></span>
+                        </div>
+                    <div>
+                        <div style="width:50%; display:flex;" class="d-flex justify-content-md-start justify-content-between views-content mt-2">
+                            <div class="d-flex flex-row align-items-center"> <i class="fa fa-eye"></i> <span
+                                    class="ms-1 views" style="font-size: medium;">${address}</span> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ml-auto">
+                            <div
+                                style="padding-top: 17px; text-align: center; background-color:#fff; border:2px solid #BBBBBB; height:100px;
+                                border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%; width:100px; align-items: center;">
+                                <span style="line-height:1em; color:#1d2124; font-size: 45px;">${rating}</span>
+                                <br>
+                                <span style="font-size: 13px; color:#1d2124;">out of 5</span>
+                            </div>
+                        </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
-
-</html>

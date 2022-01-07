@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        overflow-x: hidden;
+        height: 100%;
+        background-repeat: no-repeat
+    }
+
+    .line {
+        height: 1px;
+        background-color: #EEEEEE;
+        width: 100%;
+        margin: 35px 0px
+    }
+
+    .card {
+        width: 650px;
+        margin: auto
+    }
+
+    .user-img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        cursor: pointer
+    }
+
+    .fa-star.active {
+        color: #E91E63
+    }
+
+    .btn-pink {
+        background-color: #E91E63;
+        color: #fff;
+        height: 70px;
+        padding: 20px 30px;
+        margin-top: 15px
+    }
+
+    .btn-pink:hover {
+        background-color: #D81B60
+    }
+
+    .image-bg {
+        width: 100px
+    }
+
+    .fit-image {
+        object-fit: cover;
+        width: 100%
+    }
+
+    .prod-pic {
+        width: 80px;
+        height: 100px;
+        cursor: pointer
+    }
+
+    .prod-bg {
+        width: 19.5%;
+        height: 110px;
+        background-color: #E0E0E0;
+        margin-bottom: 10px
+    }
+
+    .fat-img {
+        width: 94px;
+        height: 100px
+    }
+
+    .more {
+        width: 19.5%;
+        height: 110px;
+        color: #fff;
+        background-color: #000;
+        cursor: pointer
+    }
+
+    @media screen and (max-width: 677px) {
+        .card {
+            width: 100%;
+            margin: auto
+        }
+
+        .btn-pink {
+            width: 100%;
+            height: 40px;
+            padding: 6px 30px
+        }
+
+        .prod-bg {
+            width: 33%;
+            height: 110px;
+            background-color: #E0E0E0
+        }
+
+        .more {
+            width: 66%
+        }
+    }
+</style>
+
+<body>
+    <div>
+        <div class="card p-3 mb-3" data-toggle="modal" data-target="#exampleModalLong" style="width: 1000px;">
+            <div onclick="get_details('${gplace_id}')" class="stretched-link class=" row" style="display: flex;">
+                <div style="width: 250px; margin-left: 30px;">
+                    <div class="position-relative snipimage" style="padding: 10px; width:250px;">
+                        <img src="https://images.saatchiart.com/saatchi/660150/art/3397419/2467306-FLBVERGX-7.jpg"
+                            style="width: 200px;
+                        height: 195px; border: 2px solid #BBBBBB; border-radius: 121px; margin-right: 10px;">
+                    </div>
+                </div>
+
+                <div id='${gplace_id}' class="col-md-8 container">
+
+                    <div class="col">
+                        <br>
+                        <br>
+                        <div
+                            style="float: right;margin-top:10px;padding-top: 17px; text-align: center; background-color:#fff; border:2px solid #BBBBBB; height:100px; border-radius:50%; -moz-border-radius:50%; -webkit-border-radius:50%; width:100px; align-items: center;">
+                            <span style="line-height:1em; color:#1d2124; font-size: 45px;">${rating}</span>
+                            <br>
+                            <span style="font-size: 13px; color:#1d2124;">out of 5</span>
+                        </div>
+                    </div>
+                    <div class="mt-2 row" style="display: inline-block;">
+                        <div class="col">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h3 class="stretched-link mb-1" style="color: #1d2124;">${name}</h3>
+                                <span><i class="fa fa-heart text-danger"></i></span>
+                            </div>
+                            <div>
+                                <div style="width:50%; display:flex;"
+                                    class="d-flex justify-content-md-start justify-content-between views-content mt-2">
+                                    <div class="d-flex flex-row align-items-center"> <i class="fa fa-eye"></i> <span
+                                            class="ms-1 views" style="font-size: medium;">${address}</span> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

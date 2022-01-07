@@ -333,6 +333,19 @@
             }
         })
     }
+
+    function signinuser() {
+        let username = $('#username').val();
+        let password = $('#password').val();
+        $.ajax({
+            type: "GET",
+            url: '/signinuser',
+            data: {'username': username, 'password': password},
+            success: function (response) {
+                console.log("singin user done")
+            }
+        })
+    }
 </script>
 
 <body>
@@ -373,28 +386,24 @@
                 <span style="width:100%;display:inline;">
                     <button onclick="changecolor1()" id="hospital_button" value="hospital" type="button"
                         class="btn active-button"
-                        style="float:left; font-size: 25px; display:inline; margin: 0; width: 50%; height: 70px; border-top-right-radius: 0px; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">Hospital</button>
-                    <button onclick="changecolor2()" id="shelter_button" value="shelter" type="button" class="btn"
-                        style="float:left; font-size: 25px; display:inline; margin: 0; width: 50%; height: 70px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">Shelter</button>
+                        style="float:left; font-size: 25px; display:inline; margin: 0; width: 100%; height: 70px; border-top-right-radius: 0px; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;">
+                    Sign in to Polar</button>
                 </span>
                 <br>
                 <br>
                 <br>
-                <div style="align-items: center; display: block; padding-top: 60px; padding-left: 50px;">
+                <div style="align-items: center; display: block; padding-top: 50px; padding-left: 50px;">
                     <div>
-                        <input id="user_input" type="text" class="form-control" placeholder="zipcode"
+                        <input id="username" type="text" class="form-control" placeholder="username"
                             style="width: 500px; height: 50px; border-radius: 20px; margin-bottom:20px;" />
                     </div>
-                    <select id="range_selection" class="form-select"
-                        style="width: 500px; height: 50px; border-radius: 20px; margin-bottom:20px; padding: 10px; padding-right: 10px;">
-                        <option selected style="color:gray;">Select Distance</option>
-                        <option value="5">5 miles</option>
-                        <option value="10">10 miles</option>
-                        <option value="15">15 miles</option>
-                    </select>
+                    <div>
+                        <input id="password" type="password" class="form-control" placeholder="password"
+                            style="width: 500px; height: 50px; border-radius: 20px; margin-bottom:20px;" />
+                    </div>
                     <div class="form-group">
-                        <button onclick="search()" style="margin: auto; display: block;" type="submit"
-                            class="btnSubmit">Search</button>
+                        <button onclick="signinuser()" style="margin-left: 110px; display: block;" type="submit"
+                            class="btnSubmit">Sign In</button>
                     </div>
                 </div>
             </div>
